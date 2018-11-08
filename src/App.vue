@@ -9,4 +9,7 @@
 </template>
 
 <style lang="scss">
+@import '../node_modules/spectre.css/dist/spectre.min.css';
+@import '../node_modules/spectre.css/dist/spectre-exp.min.css';
+@import '../node_modules/spectre.css/dist/spectre-icons.min.css';
 </style>
