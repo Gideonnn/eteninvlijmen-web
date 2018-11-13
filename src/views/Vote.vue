@@ -131,6 +131,9 @@ export default {
       return this.getDate(7);
     },
   },
+  created() {
+    this.$store.dispatch(types.LOAD_USERS);
+  },
   methods: {
     getDate(dayOffset) {
       return moment()
