@@ -3,7 +3,7 @@
     <div class="panel">
 
       <div class="panel-header">
-        <Header title="Gideon" subtitle="WEEK 32"/>
+        <Header title="Gideon" :subtitle="`WEEK ${week}`"/>
       </div>
 
       <div class="panel-nav">
@@ -12,25 +12,25 @@
 
       <div class="panel-body">
 
-        <SummaryTile title="Maandag" subtitle="13 november" :percent="40"/>
+        <SummaryTile title="Maandag" :subtitle="mondayDate" :percent="40"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Dinsdag" subtitle="14 november" :percent="10"/>
+        <SummaryTile title="Dinsdag" :subtitle="tuesdayDate" :percent="10"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Woensdag" subtitle="15 november" :percent="60"/>
+        <SummaryTile title="Woensdag" :subtitle="wednesdayDate" :percent="60"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Donderdag" subtitle="16 november" :percent="60"/>
+        <SummaryTile title="Donderdag" :subtitle="thursdayDate" :percent="60"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Vrijdag" subtitle="17 november" :percent="80"/>
+        <SummaryTile title="Vrijdag" :subtitle="fridayDate" :percent="80"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zaterdag" subtitle="18 november" :percent="40"/>
+        <SummaryTile title="Zaterdag" :subtitle="saturdayDate" :percent="40"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zondag" subtitle="19 november" :percent="20"/>
+        <SummaryTile title="Zondag" :subtitle="sundayDate" :percent="20"/>
         <div class="divider"></div>
 
       </div>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import Header from '../components/Header.vue';
 import Navigation from '../components/Navigation.vue';
 import SummaryTile from '../components/SummaryTile.vue';
@@ -50,6 +51,48 @@ export default {
     Header,
     Navigation,
     SummaryTile,
+  },
+  props: {
+    year: {
+      type: Number,
+      required: true,
+    },
+    week: {
+      type: Number,
+      required: true,
+    },
+  },
+  computed: {
+    mondayDate() {
+      return this.getDate(1);
+    },
+    tuesdayDate() {
+      return this.getDate(2);
+    },
+    wednesdayDate() {
+      return this.getDate(3);
+    },
+    thursdayDate() {
+      return this.getDate(4);
+    },
+    fridayDate() {
+      return this.getDate(5);
+    },
+    saturdayDate() {
+      return this.getDate(6);
+    },
+    sundayDate() {
+      return this.getDate(7);
+    },
+  },
+  methods: {
+    getDate(dayOffset) {
+      return moment()
+        .year(this.year)
+        .week(this.week)
+        .day(dayOffset)
+        .format('D MMMM');
+    },
   },
 };
 </script>

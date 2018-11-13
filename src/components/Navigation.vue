@@ -3,11 +3,15 @@
     <ul class="tab tab-block">
 
       <li class="tab-item">
-        <router-link to="/">Stemmen</router-link>
+        <router-link to="/home" :class="{ active: isActive('home') }">
+          Stemmen
+        </router-link>
       </li>
 
       <li class="tab-item">
-        <router-link to="/overzicht">Overzicht</router-link>
+        <router-link to="/overzicht" :class="{ active: isActive('overzicht') }">
+          Overzicht
+        </router-link>
       </li>
 
     </ul>
@@ -17,6 +21,11 @@
 <script>
 export default {
   name: 'Navigation',
+  methods: {
+    isActive(route) {
+      return this.$route.path.endsWith(route);
+    },
+  },
 };
 </script>
 
