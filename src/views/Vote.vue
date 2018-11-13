@@ -15,7 +15,7 @@
         <VoteTile
           title="Maandag"
           :subtitle="mondayDate"
-          :checked="checked[0]"
+          :checked="getDayPreference(0)"
           @toggle="onToggle(0)"
         />
         <div class="divider"></div>
@@ -23,7 +23,7 @@
         <VoteTile
           title="Dinsdag"
           :subtitle="tuesdayDate"
-          :checked="checked[1]"
+          :checked="getDayPreference(1)"
           @toggle="onToggle(1)"
         />
         <div class="divider"></div>
@@ -31,7 +31,7 @@
         <VoteTile
           title="Woensdag"
           :subtitle="wednesdayDate"
-          :checked="checked[2]"
+          :checked="getDayPreference(2)"
           @toggle="onToggle(2)"
         />
         <div class="divider"></div>
@@ -39,7 +39,7 @@
         <VoteTile
           title="Donderdag"
           :subtitle="thursdayDate"
-          :checked="checked[3]"
+          :checked="getDayPreference(3)"
           @toggle="onToggle(3)"
         />
         <div class="divider"></div>
@@ -47,7 +47,7 @@
         <VoteTile
           title="Vrijdag"
           :subtitle="fridayDate"
-          :checked="checked[4]"
+          :checked="getDayPreference(4)"
           @toggle="onToggle(4)"
         />
         <div class="divider"></div>
@@ -55,7 +55,7 @@
         <VoteTile
           title="Zaterdag"
           :subtitle="saturdayDate"
-          :checked="checked[5]"
+          :checked="getDayPreference(5)"
           @toggle="onToggle(5)"
         />
         <div class="divider"></div>
@@ -63,7 +63,7 @@
         <VoteTile
           title="Zondag"
           :subtitle="sundayDate"
-          :checked="checked[6]"
+          :checked="getDayPreference(6)"
           @toggle="onToggle(6)"
         />
         <div class="divider"></div>
@@ -79,10 +79,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import moment from 'moment';
+
+// Components
 import Header from '../components/Header.vue';
 import Navigation from '../components/Navigation.vue';
 import VoteTile from '../components/VoteTile.vue';
+
+// State
+import types from '../store/types';
 
 export default {
   name: 'Vote',
@@ -101,12 +107,8 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      checked: [true, false, true, false, false, true, true],
-    };
-  },
   computed: {
+    ...mapGetters(['getDayPreference']),
     mondayDate() {
       return this.getDate(1);
     },
@@ -138,7 +140,7 @@ export default {
         .format('D MMMM');
     },
     onToggle(index) {
-      this.checked.splice(index, 1, !this.checked[index]);
+      this.$store.commit(types.TOGGLE_DAY, index);
     },
   },
 };
