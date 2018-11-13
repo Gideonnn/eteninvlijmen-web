@@ -8,12 +8,12 @@
 
     <div class="tile-action">
 
-      <button class="btn btn-link btn-lg">
-        <i class="icon icon-stop text-gray" :class="{ 'text-error': !checked}"></i>
+      <button class="btn btn-link btn-lg" v-show="!checked" @click="toggle()">
+        <i class="icon icon-stop text-gray"></i>
       </button>
 
-      <button class="btn btn-link btn-lg">
-        <i class="icon icon-check text-gray" :class="{ 'text-success': checked}"></i>
+      <button class="btn btn-link btn-lg" v-show="checked" @click="toggle()">
+        <i class="icon icon-check text-success"></i>
       </button>
 
     </div>
@@ -36,6 +36,11 @@ export default {
     checked: {
       required: true,
       type: Boolean,
+    },
+  },
+  methods: {
+    toggle() {
+      this.$emit('toggle');
     },
   },
 };

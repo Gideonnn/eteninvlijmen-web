@@ -12,25 +12,60 @@
 
       <div class="panel-body">
 
-        <VoteTile title="Maandag" :subtitle="mondayDate" :checked="true"/>
+        <VoteTile
+          title="Maandag"
+          :subtitle="mondayDate"
+          :checked="checked[0]"
+          @toggle="onToggle(0)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Dinsdag" :subtitle="tuesdayDate" :checked="false"/>
+        <VoteTile
+          title="Dinsdag"
+          :subtitle="tuesdayDate"
+          :checked="checked[1]"
+          @toggle="onToggle(1)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Woensdag" :subtitle="wednesdayDate" :checked="true"/>
+        <VoteTile
+          title="Woensdag"
+          :subtitle="wednesdayDate"
+          :checked="checked[2]"
+          @toggle="onToggle(2)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Donderdag" :subtitle="thursdayDate" :checked="false"/>
+        <VoteTile
+          title="Donderdag"
+          :subtitle="thursdayDate"
+          :checked="checked[3]"
+          @toggle="onToggle(3)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Vrijdag" :subtitle="fridayDate" :checked="true"/>
+        <VoteTile
+          title="Vrijdag"
+          :subtitle="fridayDate"
+          :checked="checked[4]"
+          @toggle="onToggle(4)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Zaterdag" :subtitle="saturdayDate" :checked="false"/>
+        <VoteTile
+          title="Zaterdag"
+          :subtitle="saturdayDate"
+          :checked="checked[5]"
+          @toggle="onToggle(5)"
+        />
         <div class="divider"></div>
 
-        <VoteTile title="Zondag" :subtitle="sundayDate" :checked="false"/>
+        <VoteTile
+          title="Zondag"
+          :subtitle="sundayDate"
+          :checked="checked[6]"
+          @toggle="onToggle(6)"
+        />
         <div class="divider"></div>
 
       </div>
@@ -66,6 +101,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      checked: [true, false, true, false, false, true, true],
+    };
+  },
   computed: {
     mondayDate() {
       return this.getDate(1);
@@ -96,6 +136,9 @@ export default {
         .week(this.week)
         .day(dayOffset)
         .format('D MMMM');
+    },
+    onToggle(index) {
+      this.checked.splice(index, 1, !this.checked[index]);
     },
   },
 };
