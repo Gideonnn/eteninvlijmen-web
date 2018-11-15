@@ -20,8 +20,16 @@ const hideProfileSwitcher = state => {
   state.ui.showProfileSwitcher = false;
 };
 
+const loadCurrentUser = state => {
+  const userId = localStorage.getItem('user');
+  if (userId) {
+    state.auth.currentUserId = userId;
+  }
+};
+
 const switchCurrentUser = state => {
   state.auth.currentUserId = state.auth.selectedUserId;
+  localStorage.setItem('user', state.auth.selectedUserId);
 };
 
 const toggleDay = (state, index) => {
@@ -34,6 +42,7 @@ export default {
   [types.SELECT_USER]: selectUser,
   [types.SHOW_PROFILE_SWITCHER]: showProfileSwitcher,
   [types.HIDE_PROFILE_SWITCHER]: hideProfileSwitcher,
+  [types.LOAD_CURRENT_USER]: loadCurrentUser,
   [types.SWITCH_CURRENT_USER]: switchCurrentUser,
   [types.TOGGLE_DAY]: toggleDay,
 };

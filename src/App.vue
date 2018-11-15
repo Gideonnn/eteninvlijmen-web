@@ -10,6 +10,7 @@ import types from './store/types';
 export default {
   name: 'App',
   created() {
+    this.$store.commit(types.LOAD_CURRENT_USER);
     this.$store.dispatch(types.LOAD_USERS);
   },
 };
