@@ -3,7 +3,13 @@
     <div class="panel">
 
       <div class="panel-header">
-        <Header title="Gideon" :subtitle="`WEEK ${week}`"/>
+        <Header
+          :avatar-url="getCurrentUserAvatar"
+          :title="getCurrentUserName"
+          :subtitle="`WEEK ${week}`"
+        >
+          <ProfileSwitcher v-show="getShowProfileSwitcher"/>
+        </Header>
       </div>
 
       <div class="panel-nav">
@@ -40,16 +46,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import moment from 'moment';
+
+// Components
 import Header from '../components/Header.vue';
 import Navigation from '../components/Navigation.vue';
+import ProfileSwitcher from '../components/ProfileSwitcher.vue';
 import SummaryTile from '../components/SummaryTile.vue';
+
+// State
+import types from '../store/types';
 
 export default {
   name: 'Summary',
   components: {
     Header,
     Navigation,
+    ProfileSwitcher,
     SummaryTile,
   },
   props: {
@@ -63,6 +77,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher']),
     mondayDate() {
       return this.getDate(1);
     },
@@ -83,6 +98,12 @@ export default {
     },
     sundayDate() {
       return this.getDate(7);
+    },
+    getCurrentUserName() {
+      return this.getCurrentUser ? this.getCurrentUser.name : 'Klik hier';
+    },
+    getCurrentUserAvatar() {
+      return this.getCurrentUser ? this.getCurrentUser.avatar : '';
     },
   },
   methods: {

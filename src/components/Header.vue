@@ -2,13 +2,13 @@
   <div class="text-center">
 
     <figure class="avatar avatar-lg">
-      <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairFro&accessoriesType=Kurt&hairColor=Brown&facialHairType=BeardMedium&facialHairColor=BrownDark&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Disbelief&skinColor=Light" alt="Avatar">
+      <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
     </figure>
 
     <div class="panel-title h5" @click="showProfileSwitcher">{{ title }}</div>
     <div class="panel-subtitle">{{ subtitle }}</div>
 
-    <ProfileSwitcher v-show="getShowProfileSwitcher"/>
+    <slot></slot>
   </div>
 </template>
 
@@ -22,6 +22,10 @@ import ProfileSwitcher from './ProfileSwitcher.vue';
 export default {
   name: 'Header',
   props: {
+    avatarUrl: {
+      required: true,
+      type: String,
+    },
     title: {
       required: true,
       type: String,

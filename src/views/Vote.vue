@@ -3,7 +3,13 @@
     <div class="panel">
 
       <div class="panel-header">
-        <Header title="Gideon" :subtitle="`WEEK ${week}`"/>
+        <Header
+          :avatar-url="getCurrentUserAvatar"
+          :title="getCurrentUserName"
+          :subtitle="`WEEK ${week}`"
+        >
+          <ProfileSwitcher v-show="getShowProfileSwitcher"/>
+        </Header>
       </div>
 
       <div class="panel-nav">
@@ -85,6 +91,7 @@ import moment from 'moment';
 // Components
 import Header from '../components/Header.vue';
 import Navigation from '../components/Navigation.vue';
+import ProfileSwitcher from '../components/ProfileSwitcher.vue';
 import VoteTile from '../components/VoteTile.vue';
 
 // State
@@ -95,6 +102,7 @@ export default {
   components: {
     Header,
     Navigation,
+    ProfileSwitcher,
     VoteTile,
   },
   props: {
@@ -108,7 +116,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getDayPreference']),
+    ...mapGetters(['getCurrentUser', 'getDayPreference', 'getShowProfileSwitcher']),
     mondayDate() {
       return this.getDate(1);
     },
@@ -130,9 +138,12 @@ export default {
     sundayDate() {
       return this.getDate(7);
     },
-  },
-  created() {
-    this.$store.dispatch(types.LOAD_USERS);
+    getCurrentUserName() {
+      return this.getCurrentUser ? this.getCurrentUser.name : 'Klik hier';
+    },
+    getCurrentUserAvatar() {
+      return this.getCurrentUser ? this.getCurrentUser.avatar : '';
+    },
   },
   methods: {
     getDate(dayOffset) {
