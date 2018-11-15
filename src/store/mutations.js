@@ -29,6 +29,7 @@ const loadCurrentUser = state => {
 
 const switchCurrentUser = state => {
   state.auth.currentUserId = state.auth.selectedUserId;
+  state.ui.showProfileSwitcher = false;
   localStorage.setItem('user', state.auth.selectedUserId);
 };
 
