@@ -14,7 +14,7 @@
           <figure
             class="avatar avatar-xl"
             v-for="user in getAllUsers"
-            :class="{ selected: getSelectedUserId === user._id }"
+            :class="{ highlighted: isHighlighted(user._id) }"
             :key="user._id"
             @click="onSelectUser(user._id)"
           >
@@ -45,9 +45,16 @@ import types from '../store/types';
 export default {
   name: 'ProfileSwitcher',
   computed: {
-    ...mapGetters(['getAllUsers', 'getSelectedUserId']),
+    ...mapGetters(['getAllUsers', 'getCurrentUserId', 'getSelectedUserId']),
   },
   methods: {
+    isHighlighted(userId) {
+      if (this.getSelectedUserId) {
+        return this.getSelectedUserId === userId;
+      } else {
+        return this.getCurrentUserId === userId;
+      }
+    },
     onClose() {
       this.$store.commit(types.HIDE_PROFILE_SWITCHER);
     },
@@ -68,7 +75,7 @@ export default {
   opacity: 0.25;
   width: 4.2rem;
 
-  &.selected {
+  &.highlighted {
     opacity: 1;
   }
 }
