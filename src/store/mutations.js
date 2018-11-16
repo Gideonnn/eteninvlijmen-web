@@ -8,6 +8,14 @@ const loadUsersSuccess = (state, users) => {
   state.auth.allUsers = users;
 };
 
+const loadWeekPrefFailure = (state, error) => {
+  console.error('Error while loading dat preferences: ', error);
+};
+
+const loadWeekPrefSuccess = (state, prefs) => {
+  state.ui.dayPreference = prefs;
+};
+
 const selectUser = (state, userId) => {
   state.auth.selectedUserId = userId;
 };
@@ -40,6 +48,8 @@ const toggleDay = (state, index) => {
 export default {
   [types.LOAD_USERS_FAILURE]: loadUsersFailure,
   [types.LOAD_USERS_SUCCESS]: loadUsersSuccess,
+  [types.LOAD_WEEK_PREF_FAILURE]: loadWeekPrefFailure,
+  [types.LOAD_WEEK_PREF_SUCCESS]: loadWeekPrefSuccess,
   [types.SELECT_USER]: selectUser,
   [types.SHOW_PROFILE_SWITCHER]: showProfileSwitcher,
   [types.HIDE_PROFILE_SWITCHER]: hideProfileSwitcher,
