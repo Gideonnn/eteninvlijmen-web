@@ -1,5 +1,13 @@
 import types from './types';
 
+const loadSummaryFailure = (state, error) => {
+  console.error('Error while loading summary: ', error);
+};
+
+const loadSummarySuccess = (state, summary) => {
+  state.data.summary = summary;
+};
+
 const loadUsersFailure = (state, error) => {
   console.error('Error while loading users: ', error);
 };
@@ -58,6 +66,9 @@ const toggleDay = (state, index) => {
 };
 
 export default {
+  [types.LOAD_SUMMARY_FAILURE]: loadSummaryFailure,
+  [types.LOAD_SUMMARY_SUCCESS]: loadSummarySuccess,
+
   [types.LOAD_USERS_FAILURE]: loadUsersFailure,
   [types.LOAD_USERS_SUCCESS]: loadUsersSuccess,
 

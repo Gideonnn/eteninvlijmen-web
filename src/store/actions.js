@@ -2,6 +2,15 @@ import types from './types';
 import authService from '../services/auth.service';
 import voteService from '../services/vote.service';
 
+const loadSummary = async ({ commit }, { year, week }) => {
+  try {
+    const { data } = await voteService.getSummary(year, week);
+    commit(types.LOAD_SUMMARY_SUCCESS, data);
+  } catch (err) {
+    commit(types.LOAD_SUMMARY_FAILURE, err);
+  }
+};
+
 const loadUsers = async ({ commit }) => {
   try {
     const { data } = await authService.getUsers();
@@ -35,6 +44,7 @@ const submitWeekPref = async ({ state, dispatch, commit }, { year, week, userId 
 };
 
 export default {
+  [types.LOAD_SUMMARY]: loadSummary,
   [types.LOAD_USERS]: loadUsers,
   [types.LOAD_WEEK_PREF]: loadWeekPref,
   [types.DISPLAY_TOAST]: showToast,

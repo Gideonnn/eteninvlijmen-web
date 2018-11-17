@@ -18,25 +18,25 @@
 
       <div class="panel-body">
 
-        <SummaryTile title="Maandag" :subtitle="mondayDate" :percent="40"/>
+        <SummaryTile title="Maandag" :subtitle="mondayDate" :percent="getSummary[0]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Dinsdag" :subtitle="tuesdayDate" :percent="10"/>
+        <SummaryTile title="Dinsdag" :subtitle="tuesdayDate" :percent="getSummary[1]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Woensdag" :subtitle="wednesdayDate" :percent="60"/>
+        <SummaryTile title="Woensdag" :subtitle="wednesdayDate" :percent="getSummary[2]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Donderdag" :subtitle="thursdayDate" :percent="60"/>
+        <SummaryTile title="Donderdag" :subtitle="thursdayDate" :percent="getSummary[3]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Vrijdag" :subtitle="fridayDate" :percent="80"/>
+        <SummaryTile title="Vrijdag" :subtitle="fridayDate" :percent="getSummary[4]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zaterdag" :subtitle="saturdayDate" :percent="40"/>
+        <SummaryTile title="Zaterdag" :subtitle="saturdayDate" :percent="getSummary[5]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zondag" :subtitle="sundayDate" :percent="20"/>
+        <SummaryTile title="Zondag" :subtitle="sundayDate" :percent="getSummary[6]"/>
         <div class="divider"></div>
 
       </div>
@@ -77,7 +77,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher']),
+    ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher', 'getSummary']),
     mondayDate() {
       return this.getDate(1);
     },
@@ -105,6 +105,9 @@ export default {
     getCurrentUserAvatar() {
       return this.getCurrentUser ? this.getCurrentUser.avatar : '';
     },
+  },
+  created() {
+    this.$store.dispatch(types.LOAD_SUMMARY, { year: this.year, week: this.week });
   },
   methods: {
     getDate(dayOffset) {
