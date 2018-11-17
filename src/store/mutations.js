@@ -20,20 +20,24 @@ const selectUser = (state, userId) => {
   state.auth.selectedUserId = userId;
 };
 
-const submitWeekPrefFailure = (state, error) => {
-  console.error('Error while submitting date preferences: ', error);
-};
-
-const submitWeekPrefSuccess = state => {
-  console.log('Gelukt!');
-};
-
 const showProfileSwitcher = state => {
   state.ui.showProfileSwitcher = true;
 };
 
 const hideProfileSwitcher = state => {
   state.ui.showProfileSwitcher = false;
+};
+
+const hideToast = state => {
+  state.ui.toast.type = '';
+  state.ui.toast.message = '';
+  state.ui.toast.visible = false;
+};
+
+const showToast = (state, { type, message }) => {
+  state.ui.toast.type = type;
+  state.ui.toast.message = message;
+  state.ui.toast.visible = true;
 };
 
 const loadCurrentUser = state => {
@@ -56,14 +60,21 @@ const toggleDay = (state, index) => {
 export default {
   [types.LOAD_USERS_FAILURE]: loadUsersFailure,
   [types.LOAD_USERS_SUCCESS]: loadUsersSuccess,
+
   [types.LOAD_WEEK_PREF_FAILURE]: loadWeekPrefFailure,
   [types.LOAD_WEEK_PREF_SUCCESS]: loadWeekPrefSuccess,
+
   [types.SELECT_USER]: selectUser,
-  [types.SUBMIT_WEEK_PREF_FAILURE]: submitWeekPrefFailure,
-  [types.SUBMIT_WEEK_PREF_SUCCESS]: submitWeekPrefSuccess,
+
   [types.SHOW_PROFILE_SWITCHER]: showProfileSwitcher,
   [types.HIDE_PROFILE_SWITCHER]: hideProfileSwitcher,
+
+  [types.HIDE_TOAST]: hideToast,
+  [types.SHOW_TOAST]: showToast,
+
   [types.LOAD_CURRENT_USER]: loadCurrentUser,
+
   [types.SWITCH_CURRENT_USER]: switchCurrentUser,
+
   [types.TOGGLE_DAY]: toggleDay,
 };

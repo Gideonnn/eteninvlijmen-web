@@ -20,17 +20,23 @@ const loadWeekPref = async ({ commit }, { year, week, userId }) => {
   }
 };
 
-const submitWeekPref = async ({ state, commit }, { year, week, userId }) => {
+const showToast = async ({ state, commit }, { type, message }) => {
+  commit(types.SHOW_TOAST, { type, message });
+  setTimeout(() => commit(types.HIDE_TOAST), 2000);
+};
+
+const submitWeekPref = async ({ state, dispatch, commit }, { year, week, userId }) => {
   try {
     const result = await voteService.submitWeekPref(year, week, userId, state.ui.dayPreference);
-    commit(types.SUBMIT_WEEK_PREF_SUCCESS, result);
+    dispatch(types.DISPLAY_TOAST, { type: 'success', message: 'Bedankt! Invullen gelukt. 🎉' });
   } catch (err) {
-    commit(types.SUBMIT_WEEK_PREF_FAILURE, err);
+    dispatch(types.DISPLAY_TOAST, { type: 'error', message: 'Oeps! Er is iets misgegaan.' });
   }
 };
 
 export default {
   [types.LOAD_USERS]: loadUsers,
   [types.LOAD_WEEK_PREF]: loadWeekPref,
+  [types.DISPLAY_TOAST]: showToast,
   [types.SUBMIT_WEEK_PREF]: submitWeekPref,
 };

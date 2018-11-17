@@ -18,6 +18,12 @@ const getSelectedUser = state =>
 
 const getSelectedUserId = state => state.auth.selectedUserId;
 
+const getToastMessage = state => state.ui.toast.message;
+
+const getToastType = state => state.ui.toast.type;
+
+const getToastVisible = state => state.ui.toast.visible;
+
 export default {
   getAllUsers,
   getCurrentUser,
@@ -26,4 +32,7 @@ export default {
   getShowProfileSwitcher,
   getSelectedUser,
   getSelectedUserId,
+  getToastMessage,
+  getToastType,
+  getToastVisible,
 };
