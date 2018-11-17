@@ -116,7 +116,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'getDayPreference', 'getShowProfileSwitcher']),
+    ...mapGetters([
+      'getCurrentUser',
+      'getCurrentUserId',
+      'getDayPreference',
+      'getShowProfileSwitcher',
+    ]),
     mondayDate() {
       return this.getDate(1);
     },
@@ -144,6 +149,15 @@ export default {
     getCurrentUserAvatar() {
       return this.getCurrentUser ? this.getCurrentUser.avatar : '';
     },
+  },
+  created() {
+    if (this.getCurrentUserId) {
+      this.$store.dispatch(types.LOAD_WEEK_PREF, {
+        year: this.year,
+        week: this.week,
+        name: this.getCurrentUserId,
+      });
+    }
   },
   methods: {
     getDate(dayOffset) {

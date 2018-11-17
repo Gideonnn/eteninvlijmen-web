@@ -11,9 +11,9 @@ const loadUsers = async ({ commit }) => {
   }
 };
 
-const loadWeekPref = async ({ commit }, { year, week, name }) => {
+const loadWeekPref = async ({ commit }, { year, week, userId }) => {
   try {
-    const { data } = await voteService.getWeekPref(year, week, name);
+    const { data } = await voteService.getWeekPref(year, week, userId);
     commit(types.LOAD_WEEK_PREF_SUCCESS, data);
   } catch (err) {
     commit(types.LOAD_WEEK_PREF_FAILURE, err);
