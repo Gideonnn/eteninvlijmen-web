@@ -20,7 +20,17 @@ const loadWeekPref = async ({ commit }, { year, week, userId }) => {
   }
 };
 
+const submitWeekPref = async ({ state, commit }, { year, week, userId }) => {
+  try {
+    const result = await voteService.submitWeekPref(year, week, userId, state.ui.dayPreference);
+    commit(types.SUBMIT_WEEK_PREF_SUCCESS, result);
+  } catch (err) {
+    commit(types.SUBMIT_WEEK_PREF_FAILURE, err);
+  }
+};
+
 export default {
   [types.LOAD_USERS]: loadUsers,
   [types.LOAD_WEEK_PREF]: loadWeekPref,
+  [types.SUBMIT_WEEK_PREF]: submitWeekPref,
 };

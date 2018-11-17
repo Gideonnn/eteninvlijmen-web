@@ -77,7 +77,7 @@
       </div>
 
       <div class="panel-footer">
-        <button class="btn btn-primary btn-block">Opslaan</button>
+        <button class="btn btn-primary btn-block" @click="onSubmit">Opslaan</button>
       </div>
 
     </div>
@@ -155,7 +155,7 @@ export default {
       this.$store.dispatch(types.LOAD_WEEK_PREF, {
         year: this.year,
         week: this.week,
-        name: this.getCurrentUserId,
+        userId: this.getCurrentUserId,
       });
     }
   },
@@ -166,6 +166,13 @@ export default {
         .week(this.week)
         .day(dayOffset)
         .format('D MMMM');
+    },
+    onSubmit() {
+      this.$store.dispatch(types.SUBMIT_WEEK_PREF, {
+        year: this.year,
+        week: this.week,
+        userId: this.getCurrentUserId,
+      });
     },
     onToggle(index) {
       this.$store.commit(types.TOGGLE_DAY, index);

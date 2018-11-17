@@ -5,7 +5,7 @@ export default {
     allUsers: [],
   },
   ui: {
-    dayPreference: [true, false, true, false, false, true, true],
+    dayPreference: [false, false, false, false, false, false, false],
     showProfileSwitcher: false,
   },
 };

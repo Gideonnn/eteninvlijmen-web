@@ -12,12 +12,20 @@ const loadWeekPrefFailure = (state, error) => {
   console.error('Error while loading dat preferences: ', error);
 };
 
-const loadWeekPrefSuccess = (state, prefs) => {
-  state.ui.dayPreference = prefs;
+const loadWeekPrefSuccess = (state, preferences) => {
+  state.ui.dayPreference = preferences;
 };
 
 const selectUser = (state, userId) => {
   state.auth.selectedUserId = userId;
+};
+
+const submitWeekPrefFailure = (state, error) => {
+  console.error('Error while submitting date preferences: ', error);
+};
+
+const submitWeekPrefSuccess = state => {
+  console.log('Gelukt!');
 };
 
 const showProfileSwitcher = state => {
@@ -51,6 +59,8 @@ export default {
   [types.LOAD_WEEK_PREF_FAILURE]: loadWeekPrefFailure,
   [types.LOAD_WEEK_PREF_SUCCESS]: loadWeekPrefSuccess,
   [types.SELECT_USER]: selectUser,
+  [types.SUBMIT_WEEK_PREF_FAILURE]: submitWeekPrefFailure,
+  [types.SUBMIT_WEEK_PREF_SUCCESS]: submitWeekPrefSuccess,
   [types.SHOW_PROFILE_SWITCHER]: showProfileSwitcher,
   [types.HIDE_PROFILE_SWITCHER]: hideProfileSwitcher,
   [types.LOAD_CURRENT_USER]: loadCurrentUser,
