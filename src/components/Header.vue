@@ -1,8 +1,10 @@
 <template>
-  <div class="text-center">
+  <div class="text-center" v-if="this.getCurrentUser">
 
     <figure class="avatar avatar-lg">
-      <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
+      <router-link :to="`/profile/${this.getCurrentUser.name}`">
+        <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
+      </router-link>
     </figure>
 
     <div class="panel-title h5" @click="showProfileSwitcher">{{ title }}</div>
@@ -39,7 +41,7 @@ export default {
     ProfileSwitcher,
   },
   computed: {
-    ...mapGetters(['getShowProfileSwitcher']),
+    ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher']),
   },
   methods: {
     showProfileSwitcher() {

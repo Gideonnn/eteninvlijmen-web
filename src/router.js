@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import Vote from './views/Vote.vue';
 import Summary from './views/Summary.vue';
+import Profile from './views/Profile.vue';
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ const addDateToQuery = (to, from, next) => {
 
 export default new Router({
   routes: [
+    {
+      path: '/profile/:name',
+      name: 'profile',
+      component: Profile,
+    },
     {
       path: '/home',
       name: 'home',

@@ -1,5 +1,6 @@
 import types from './types';
 import authService from '../services/auth.service';
+import profileService from '../services/profile.service';
 import voteService from '../services/vote.service';
 
 const loadSummary = async ({ commit }, { year, week }) => {
@@ -43,10 +44,21 @@ const submitWeekPref = async ({ state, dispatch, commit }, { year, week, userId 
   }
 };
 
+const updateUser = async ({ dispatch }, user) => {
+  try {
+    await profileService.updateUser(user);
+    dispatch(types.LOAD_USERS);
+    dispatch(types.DISPLAY_TOAST, { type: 'success', message: 'Je avatar is geüpdatet' });
+  } catch (err) {
+    dispatch(types.DISPLAY_TOAST, { type: 'error', message: 'Oeps! Er is iets misgegaan.' });
+  }
+};
+
 export default {
   [types.LOAD_SUMMARY]: loadSummary,
   [types.LOAD_USERS]: loadUsers,
   [types.LOAD_WEEK_PREF]: loadWeekPref,
   [types.DISPLAY_TOAST]: showToast,
   [types.SUBMIT_WEEK_PREF]: submitWeekPref,
+  [types.UPDATE_USER]: updateUser,
 };
