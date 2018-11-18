@@ -44,11 +44,12 @@ const submitWeekPref = async ({ state, dispatch, commit }, { year, week, userId 
   }
 };
 
-const updateUser = async ({ dispatch }, user) => {
+const updateUser = async ({ commit, dispatch }, user) => {
   try {
     await profileService.updateUser(user);
     dispatch(types.LOAD_USERS);
     dispatch(types.DISPLAY_TOAST, { type: 'success', message: 'Je avatar is geüpdatet' });
+    commit(types.NAVIGATE, 'home');
   } catch (err) {
     dispatch(types.DISPLAY_TOAST, { type: 'error', message: 'Oeps! Er is iets misgegaan.' });
   }

@@ -1,4 +1,5 @@
 import types from './types';
+import router from '../router';
 
 const loadSummaryFailure = (state, error) => {
   console.error('Error while loading summary: ', error);
@@ -22,6 +23,10 @@ const loadWeekPrefFailure = (state, error) => {
 
 const loadWeekPrefSuccess = (state, preferences) => {
   state.ui.dayPreference = preferences;
+};
+
+const navigate = (state, route) => {
+  router.push({ name: route });
 };
 
 const selectUser = (state, userId) => {
@@ -74,6 +79,8 @@ export default {
 
   [types.LOAD_WEEK_PREF_FAILURE]: loadWeekPrefFailure,
   [types.LOAD_WEEK_PREF_SUCCESS]: loadWeekPrefSuccess,
+
+  [types.NAVIGATE]: navigate,
 
   [types.SELECT_USER]: selectUser,
 
