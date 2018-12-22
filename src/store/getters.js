@@ -2,7 +2,7 @@ const getAllUsers = state => state.auth.allUsers;
 
 const getCurrentUser = state =>
   state.auth.currentUserId
-    ? state.auth.allUsers.find(user => user._id === state.auth.currentUserId)
+    ? state.auth.allUsers.find(user => user.name === state.auth.currentUserId)
     : null;
 
 const getCurrentUserId = state => state.auth.currentUserId;
@@ -13,7 +13,7 @@ const getShowProfileSwitcher = state => state.ui.showProfileSwitcher;
 
 const getSelectedUser = state =>
   state.auth.selectedUserId
-    ? state.auth.allUsers.find(user => user._id === state.auth.selectedUserId)
+    ? state.auth.allUsers.find(user => user.name === state.auth.selectedUserId)
     : null;
 
 const getSelectedUserId = state => state.auth.selectedUserId;

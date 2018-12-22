@@ -35,9 +35,10 @@ const showToast = async ({ state, commit }, { type, message }) => {
   setTimeout(() => commit(types.HIDE_TOAST), 2000);
 };
 
-const submitWeekPref = async ({ state, dispatch, commit }, { year, week, userId }) => {
+const submitWeekPref = async ({ state, dispatch }, { year, week, userId }) => {
   try {
-    const result = await voteService.submitWeekPref(year, week, userId, state.ui.dayPreference);
+    const prefs = [...state.ui.dayPreference];
+    await voteService.submitWeekPref(year, week, userId, prefs);
     dispatch(types.DISPLAY_TOAST, { type: 'success', message: 'Bedankt! Invullen gelukt. 🎉' });
   } catch (err) {
     dispatch(types.DISPLAY_TOAST, { type: 'error', message: 'Oeps! Er is iets misgegaan.' });

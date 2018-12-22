@@ -14,9 +14,9 @@
           <figure
             class="avatar avatar-xl"
             v-for="user in getAllUsers"
-            :class="{ highlighted: isHighlighted(user._id) }"
-            :key="user._id"
-            @click="onSelectUser(user._id)"
+            :class="{ highlighted: isHighlighted(user.name) }"
+            :key="user.name"
+            @click="onSelectUser(user.name)"
           >
             <img alt="Avatar" :src="user.avatar">
           </figure>

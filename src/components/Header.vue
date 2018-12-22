@@ -1,10 +1,17 @@
 <template>
-  <div class="text-center" v-if="this.getCurrentUser">
+  <div class="text-center">
 
     <figure class="avatar avatar-lg">
-      <router-link :to="`/profile/${this.getCurrentUser.name}`">
-        <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
-      </router-link>
+
+      <div v-if="!this.getCurrentUser">
+        <img src="https://avataaars.io/?avatarStyle=Circle&topType=NoHair&clotheType=Default&skinColor=Pale" alt="Avatar">
+      </div>
+
+      <div v-if="this.getCurrentUser">
+        <router-link :to="`/profile/${this.getCurrentUser.name}`">
+          <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
+        </router-link>
+      </div>
     </figure>
 
     <div class="panel-title h5" @click="showProfileSwitcher">{{ title }}</div>
@@ -17,9 +24,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import types from '../store/types';
-
-// Components
-import ProfileSwitcher from './ProfileSwitcher.vue';
 
 export default {
   name: 'Header',
@@ -37,11 +41,26 @@ export default {
       type: String,
     },
   },
-  components: {
-    ProfileSwitcher,
-  },
   computed: {
     ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher']),
+    defaultAvatarUrl() {
+      return (
+        'https://avataaars.io/?' +
+        'avatarStyle=Circle&' +
+        'topType=Default&' +
+        'hairColor=Default&' +
+        'hatColor=Default&' +
+        'accessoriesType=Default&' +
+        'facialHairType=Default&' +
+        'facialHairColor=Default&' +
+        'clotheType=Default&' +
+        'clotheColor=Default&' +
+        'eyeType=Default&' +
+        'eyebrowType=Default&' +
+        'mouthType=Default&' +
+        'skinColor=Default'
+      );
+    },
   },
   methods: {
     showProfileSwitcher() {

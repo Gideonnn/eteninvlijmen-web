@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getUsers = async () => axios.get('http://localhost:3000/users');
+const getUsers = async () => axios.get(`/users`);
 
 export default {
   getUsers,
