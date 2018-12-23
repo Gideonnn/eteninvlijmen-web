@@ -1,14 +1,6 @@
 <template>
   <div>
-
-    <transition name="fade" enter-active-class="bounce">
-      <div class="toast-wrapper" v-if="this.getToastVisible">
-        <div class="toast" :class="`toast-${this.getToastType}`">
-          {{ this.getToastMessage }}
-        </div>
-      </div>
-    </transition>
-
+    <Toast v-if="getToastVisible" :message="getToastMessage" :type="getToastType" />
     <router-view/>
   </div>
 </template>
@@ -17,8 +9,14 @@
 import { mapGetters } from 'vuex';
 import types from './store/types';
 
+// Components
+import Toast from './components/Toast';
+
 export default {
   name: 'App',
+  components: {
+    Toast,
+  },
   computed: {
     ...mapGetters(['getToastMessage', 'getToastType', 'getToastVisible']),
   },
@@ -40,38 +38,5 @@ export default {
 
 .panel {
   border: none;
-}
-
-.toast-wrapper {
-  left: 0;
-  padding: 16px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100%;
-  z-index: 2000;
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(-200px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.bounce {
-  animation: bounce 0.15s;
 }
 </style>
