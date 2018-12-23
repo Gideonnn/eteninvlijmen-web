@@ -5,7 +5,6 @@ import router from './router';
 import store from './store/index';
 
 import './registerAxiosConfig';
-import './registerServiceWorker';
 
 Vue.config.productionTip = false;
 
