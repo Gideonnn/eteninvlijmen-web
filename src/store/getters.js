@@ -1,4 +1,5 @@
-const getAllUsers = state => state.auth.allUsers;
+const getAllUsers = state =>
+  state.auth.allUsers.slice().sort((a, b) => a.name.localeCompare(b.name));
 
 const getCurrentUser = state =>
   state.auth.currentUserId
