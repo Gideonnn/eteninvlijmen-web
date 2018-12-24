@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 .avatar {
+  background: none;
   min-height: 48px;
 
   img {
