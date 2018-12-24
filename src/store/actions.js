@@ -1,7 +1,22 @@
 import types from './types';
 import authService from '../services/auth.service';
+import newsService from '../services/news.service';
 import profileService from '../services/profile.service';
 import voteService from '../services/vote.service';
+
+const displayToast = async ({ state, commit }, { type, message }) => {
+  commit(types.SHOW_TOAST, { type, message });
+  setTimeout(() => commit(types.HIDE_TOAST), 2000);
+};
+
+const loadNews = async ({ commit }) => {
+  try {
+    const data = newsService.getNews();
+    commit(types.LOAD_NEWS_SUCCESS, data);
+  } catch (err) {
+    commit(types.LOAD_NEWS_FAILURE, err);
+  }
+};
 
 const loadSummary = async ({ commit }, { year, week }) => {
   try {
@@ -30,9 +45,9 @@ const loadWeekPref = async ({ commit }, { year, week, userId }) => {
   }
 };
 
-const showToast = async ({ state, commit }, { type, message }) => {
-  commit(types.SHOW_TOAST, { type, message });
-  setTimeout(() => commit(types.HIDE_TOAST), 2000);
+const markNewsItemRead = async ({ dispatch }, id) => {
+  newsService.markAsRead(id);
+  dispatch(types.LOAD_NEWS);
 };
 
 const submitWeekPref = async ({ state, dispatch }, { year, week, userId }) => {
@@ -57,10 +72,12 @@ const updateUser = async ({ commit, dispatch }, user) => {
 };
 
 export default {
+  [types.DISPLAY_TOAST]: displayToast,
+  [types.LOAD_NEWS]: loadNews,
   [types.LOAD_SUMMARY]: loadSummary,
   [types.LOAD_USERS]: loadUsers,
   [types.LOAD_WEEK_PREF]: loadWeekPref,
-  [types.DISPLAY_TOAST]: showToast,
+  [types.MARK_NEWS_ITEM_READ]: markNewsItemRead,
   [types.SUBMIT_WEEK_PREF]: submitWeekPref,
   [types.UPDATE_USER]: updateUser,
 };

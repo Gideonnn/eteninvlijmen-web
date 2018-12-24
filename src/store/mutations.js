@@ -1,6 +1,15 @@
 import types from './types';
 import router from '../router';
 
+const loadNewsFailure = (state, error) => {
+  console.error('Error while loading news: ', error);
+  state.data.newsItems = [];
+};
+
+const loadNewsSuccess = (state, data) => {
+  state.data.newsItems = data;
+};
+
 const loadSummaryFailure = (state, error) => {
   console.error('Error while loading summary: ', error);
 };
@@ -56,6 +65,14 @@ const hideProfileSwitcher = state => {
   state.ui.showProfileSwitcher = false;
 };
 
+const showWhatsNew = state => {
+  state.ui.showWhatsNew = true;
+};
+
+const hideWhatsNew = state => {
+  state.ui.showWhatsNew = false;
+};
+
 const hideToast = state => {
   state.ui.toast.type = '';
   state.ui.toast.message = '';
@@ -86,6 +103,9 @@ const toggleDay = (state, index) => {
 };
 
 export default {
+  [types.LOAD_NEWS_FAILURE]: loadNewsFailure,
+  [types.LOAD_NEWS_SUCCESS]: loadNewsSuccess,
+
   [types.LOAD_SUMMARY_FAILURE]: loadSummaryFailure,
   [types.LOAD_SUMMARY_SUCCESS]: loadSummarySuccess,
 
@@ -101,6 +121,9 @@ export default {
 
   [types.SHOW_PROFILE_SWITCHER]: showProfileSwitcher,
   [types.HIDE_PROFILE_SWITCHER]: hideProfileSwitcher,
+
+  [types.SHOW_WHATS_NEW]: showWhatsNew,
+  [types.HIDE_WHATS_NEW]: hideWhatsNew,
 
   [types.HIDE_TOAST]: hideToast,
   [types.SHOW_TOAST]: showToast,

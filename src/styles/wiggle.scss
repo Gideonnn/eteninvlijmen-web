@@ -2,6 +2,10 @@
   animation: 1s wiggle ease;
 }
 
+@mixin wiggleInfinite() {
+  animation: 1s wiggle ease infinite;
+}
+
 @keyframes wiggle {
   0% {
     transform: rotate(-3deg);

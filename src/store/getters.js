@@ -10,7 +10,7 @@ const getCurrentUserId = state => state.auth.currentUserId;
 
 const getDayPreference = state => index => state.ui.dayPreference[index];
 
-const getShowProfileSwitcher = state => !state.auth.currentUserId || state.ui.showProfileSwitcher;
+const getNewsItems = state => state.data.newsItems;
 
 const getSelectedUser = state =>
   state.auth.selectedUserId
@@ -18,6 +18,10 @@ const getSelectedUser = state =>
     : null;
 
 const getSelectedUserId = state => state.auth.selectedUserId;
+
+const getShowProfileSwitcher = state => !state.auth.currentUserId || state.ui.showProfileSwitcher;
+
+const getShowWhatsNew = state => state.ui.showWhatsNew && getNewsItems(state).length > 0;
 
 const getSummary = state => state.data.summary;
 
@@ -32,9 +36,11 @@ export default {
   getCurrentUser,
   getCurrentUserId,
   getDayPreference,
-  getShowProfileSwitcher,
+  getNewsItems,
   getSelectedUser,
   getSelectedUserId,
+  getShowProfileSwitcher,
+  getShowWhatsNew,
   getSummary,
   getToastMessage,
   getToastType,
