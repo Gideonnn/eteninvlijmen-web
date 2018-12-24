@@ -25,5 +25,9 @@ export default {
 <style lang="scss" scoped>
 .avatar {
   min-height: 48px;
+
+  img {
+    z-index: inherit;
+  }
 }
 </style>
