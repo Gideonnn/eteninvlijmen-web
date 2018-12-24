@@ -6,10 +6,7 @@
         <Header
           :title="getCurrentUserName"
           :avatar="getCurrentUserAvatar"
-          :subtitle="`WEEK ${week}`"
-        >
-          <ProfileSwitcher v-show="getShowProfileSwitcher"/>
-        </Header>
+          :subtitle="`WEEK ${week}`" />
       </div>
 
       <div class="panel-nav">

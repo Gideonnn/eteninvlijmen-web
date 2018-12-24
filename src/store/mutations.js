@@ -75,10 +75,10 @@ const loadCurrentUser = state => {
   }
 };
 
-const switchCurrentUser = state => {
-  state.auth.currentUserId = state.auth.selectedUserId;
+const switchCurrentUser = (state, payload) => {
+  state.auth.currentUserId = payload;
   state.ui.showProfileSwitcher = false;
-  localStorage.setItem('user', state.auth.selectedUserId);
+  localStorage.setItem('user', payload);
 };
 
 const toggleDay = (state, index) => {

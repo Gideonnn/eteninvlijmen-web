@@ -1,44 +1,37 @@
 <template>
-  <div class="popover popover-bottom">
-    <div class="popover-container">
-      <div class="card">
+  <div class="background" v-show="visible">
+    <div class="card">
 
-        <div class="card-header">
-          <i class="icon icon-cross float-right" @click="onClose"></i>
-          <div class="card-title h5">Profiel wisselen</div>
-          <div class="card-subtitle text-gray">Kies een profiel uit de lijst</div>
-        </div>
-
-        <div class="card-body">
-          <Avatar
-            class="avatar-xl"
-            v-for="user in getAllUsers"
-            :key="user.name"
-            :traits="user.avatar"
-            :class="{ highlighted: isHighlighted(user.name) }"
-            @click.native="onSelectUser(user.name)" />
-        </div>
-
-        <div class="card-footer">
-          <button
-            class="btn btn-primary btn-block"
-            :class="{ disabled: !this.getSelectedUserId }"
-            @click="onLogin"
-          >
-            Inloggen
-          </button>
-        </div>
-
+      <div class="card-header">
+        <i class="icon icon-cross float-right" @click="onClose"></i>
+        <div class="card-title h5">Profiel wisselen</div>
+        <div class="card-subtitle text-gray">Kies een profiel uit de lijst</div>
       </div>
+
+      <div class="card-body">
+        <Avatar
+          class="avatar-xl"
+          v-for="user in allUsers"
+          :key="user.name"
+          :traits="user.avatar"
+          :class="{ highlighted: isHighlighted(user.name) }"
+          @click.native="onSelectUser(user.name)" />
+      </div>
+
+      <div class="card-footer">
+        <button
+          class="btn btn-primary btn-block"
+          :class="{ disabled: !this.selectedUserId }"
+          @click="onLogin">
+          Inloggen
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import types from '../store/types';
-
-// Components
 import Avatar from './Avatar';
 
 export default {
@@ -46,44 +39,69 @@ export default {
   components: {
     Avatar,
   },
-  computed: {
-    ...mapGetters(['getAllUsers', 'getCurrentUserId', 'getSelectedUserId']),
+  props: {
+    allUsers: {
+      type: Array,
+      required: true,
+    },
+    currentUserId: {
+      type: String,
+      required: true,
+    },
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      selectedUserId: this.currentUserId,
+    };
   },
   methods: {
     isHighlighted(userId) {
-      if (this.getSelectedUserId) {
-        return this.getSelectedUserId === userId;
-      } else {
-        return this.getCurrentUserId === userId;
-      }
+      return this.selectedUserId === userId;
     },
     onClose() {
-      this.$store.commit(types.HIDE_PROFILE_SWITCHER);
+      this.$emit('cancel');
     },
     onLogin() {
-      this.$store.commit(types.SWITCH_CURRENT_USER);
+      this.$emit('login', this.selectedUserId);
     },
-    onSelectUser(name) {
-      this.$store.commit(types.SELECT_USER, name);
+    onSelectUser(userId) {
+      this.selectedUserId = userId;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.avatar-xl {
-  height: 4.2rem;
-  margin: 0.1rem;
-  opacity: 0.25;
-  width: 4.2rem;
+@import '../styles/wiggle.scss';
 
-  &.highlighted {
-    opacity: 1;
-  }
+.background {
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
-.popover-container {
-  transform: translate(-50%, 0) scale(1);
-  opacity: 1;
+.card {
+  margin: 32px auto 0 auto;
+  text-align: center;
+  width: 320px;
+
+  .avatar-xl {
+    height: 84px;
+    opacity: 0.25;
+    width: 84px;
+
+    &.highlighted {
+      opacity: 1;
+      @include wiggle();
+    }
+  }
 }
 </style>
