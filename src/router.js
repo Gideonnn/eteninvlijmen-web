@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import Vote from './views/Vote.vue';
 import Summary from './views/Summary.vue';
-import Profile from './views/Profile.vue';
+import Profile from './views/Profile/Profile.vue';
 
 Vue.use(Router);
 

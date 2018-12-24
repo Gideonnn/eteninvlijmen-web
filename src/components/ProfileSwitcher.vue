@@ -10,17 +10,13 @@
         </div>
 
         <div class="card-body">
-
-          <figure
-            class="avatar avatar-xl"
+          <Avatar
+            class="avatar-xl"
             v-for="user in getAllUsers"
-            :class="{ highlighted: isHighlighted(user.name) }"
             :key="user.name"
-            @click="onSelectUser(user.name)"
-          >
-            <img alt="Avatar" :src="user.avatar">
-          </figure>
-
+            :traits="user.avatar"
+            :class="{ highlighted: isHighlighted(user.name) }"
+            @click.native="onSelectUser(user.name)" />
         </div>
 
         <div class="card-footer">
@@ -42,8 +38,14 @@
 import { mapGetters } from 'vuex';
 import types from '../store/types';
 
+// Components
+import Avatar from './Avatar';
+
 export default {
   name: 'ProfileSwitcher',
+  components: {
+    Avatar,
+  },
   computed: {
     ...mapGetters(['getAllUsers', 'getCurrentUserId', 'getSelectedUserId']),
   },
@@ -61,8 +63,8 @@ export default {
     onLogin() {
       this.$store.commit(types.SWITCH_CURRENT_USER);
     },
-    onSelectUser(userId) {
-      this.$store.commit(types.SELECT_USER, userId);
+    onSelectUser(name) {
+      this.$store.commit(types.SELECT_USER, name);
     },
   },
 };

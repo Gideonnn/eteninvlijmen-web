@@ -4,7 +4,7 @@
 
       <div class="panel-header">
         <Header
-          :avatar-url="getCurrentUserAvatar"
+          :avatar="getCurrentUserAvatar"
           :title="getCurrentUserName"
           :subtitle="`WEEK ${week}`"
         >
@@ -144,10 +144,10 @@ export default {
       return this.getDate(7);
     },
     getCurrentUserName() {
-      return this.getCurrentUser ? this.getCurrentUser.name : 'Klik hier';
+      return this.getCurrentUser ? this.getCurrentUser.name : 'Niet ingelogd';
     },
     getCurrentUserAvatar() {
-      return this.getCurrentUser ? this.getCurrentUser.avatar : '';
+      return this.getCurrentUser ? this.getCurrentUser.avatar : {};
     },
   },
   created() {

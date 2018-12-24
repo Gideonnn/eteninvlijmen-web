@@ -1,21 +1,15 @@
 <template>
   <div class="text-center">
 
-    <figure class="avatar avatar-lg">
+    <Avatar :traits="avatar || {}" @click.native="navigateToProfile(getCurrentUser)" />
 
-      <div v-if="!this.getCurrentUser">
-        <img src="https://avataaars.io/?avatarStyle=Circle&topType=NoHair&clotheType=Default&skinColor=Pale" alt="Avatar">
-      </div>
+    <div class="panel-title h5" @click="showProfileSwitcher">
+      {{ title }}
+    </div>
 
-      <div v-if="this.getCurrentUser">
-        <router-link :to="`/profile/${this.getCurrentUser.name}`">
-          <img v-if="avatarUrl" :src="avatarUrl" alt="Avatar">
-        </router-link>
-      </div>
-    </figure>
-
-    <div class="panel-title h5" @click="showProfileSwitcher">{{ title }}</div>
-    <div class="panel-subtitle">{{ subtitle }}</div>
+    <div class="panel-subtitle">
+      {{ subtitle }}
+    </div>
 
     <slot></slot>
   </div>
@@ -25,50 +19,43 @@
 import { mapGetters } from 'vuex';
 import types from '../store/types';
 
+// Components
+import Avatar from './Avatar';
+
+// Services
+import avatarService from '../services/avatar.service';
+
 export default {
   name: 'Header',
   props: {
-    avatarUrl: {
+    avatar: {
+      type: Object,
       required: true,
-      type: String,
     },
     title: {
-      required: true,
       type: String,
+      required: true,
     },
     subtitle: {
-      required: true,
       type: String,
+      required: true,
     },
+  },
+  components: {
+    Avatar,
   },
   computed: {
     ...mapGetters(['getCurrentUser', 'getShowProfileSwitcher']),
-    defaultAvatarUrl() {
-      return (
-        'https://avataaars.io/?' +
-        'avatarStyle=Circle&' +
-        'topType=Default&' +
-        'hairColor=Default&' +
-        'hatColor=Default&' +
-        'accessoriesType=Default&' +
-        'facialHairType=Default&' +
-        'facialHairColor=Default&' +
-        'clotheType=Default&' +
-        'clotheColor=Default&' +
-        'eyeType=Default&' +
-        'eyebrowType=Default&' +
-        'mouthType=Default&' +
-        'skinColor=Default'
-      );
-    },
   },
   methods: {
     showProfileSwitcher() {
       this.$store.commit(types.SHOW_PROFILE_SWITCHER);
     },
+    navigateToProfile(user) {
+      if (user) {
+        this.$router.push(`/profile/${user.name}`);
+      }
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>

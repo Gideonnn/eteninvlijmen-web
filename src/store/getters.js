@@ -10,7 +10,7 @@ const getCurrentUserId = state => state.auth.currentUserId;
 
 const getDayPreference = state => index => state.ui.dayPreference[index];
 
-const getShowProfileSwitcher = state => state.ui.showProfileSwitcher;
+const getShowProfileSwitcher = state => !state.auth.currentUserId || state.ui.showProfileSwitcher;
 
 const getSelectedUser = state =>
   state.auth.selectedUserId

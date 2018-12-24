@@ -29,10 +29,14 @@ export default {
       type: Array,
       required: true,
     },
+    selected: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
-      selectedIndex: 0,
+      selectedIndex: this.list.indexOf(this.selected),
     };
   },
   computed: {
