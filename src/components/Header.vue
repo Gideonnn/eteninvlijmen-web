@@ -22,9 +22,6 @@ import types from '../store/types';
 // Components
 import Avatar from './Avatar';
 
-// Services
-import avatarService from '../services/avatar.service';
-
 export default {
   name: 'Header',
   props: {
