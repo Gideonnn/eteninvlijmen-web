@@ -77,7 +77,12 @@
       </div>
 
       <div class="panel-footer">
-        <button class="btn btn-primary btn-block" @click="onSubmit">Opslaan</button>
+        <button
+          class="btn btn-primary btn-block"
+          :disabled="!getCurrentUserId"
+          @click="onSubmit">
+          Opslaan
+        </button>
       </div>
 
     </div>
