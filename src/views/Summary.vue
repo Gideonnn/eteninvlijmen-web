@@ -49,7 +49,6 @@ import moment from 'moment';
 // Components
 import Header from '../components/Header.vue';
 import Navigation from '../components/Navigation.vue';
-import ProfileSwitcher from '../components/ProfileSwitcher.vue';
 import SummaryTile from '../components/SummaryTile.vue';
 
 // State
@@ -60,7 +59,6 @@ export default {
   components: {
     Header,
     Navigation,
-    ProfileSwitcher,
     SummaryTile,
   },
   props: {
