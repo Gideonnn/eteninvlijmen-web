@@ -1,6 +1,8 @@
 const getAllUsers = state =>
   state.auth.allUsers.slice().sort((a, b) => a.name.localeCompare(b.name));
 
+const getAllUsersCount = state => state.auth.allUsers.length;
+
 const getCurrentUser = state =>
   state.auth.currentUserId
     ? state.auth.allUsers.find(user => user.name === state.auth.currentUserId)
@@ -33,6 +35,7 @@ const getToastVisible = state => state.ui.toast.visible;
 
 export default {
   getAllUsers,
+  getAllUsersCount,
   getCurrentUser,
   getCurrentUserId,
   getDayPreference,

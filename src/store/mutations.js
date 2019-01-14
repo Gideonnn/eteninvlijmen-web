@@ -15,22 +15,19 @@ const loadSummaryFailure = (state, error) => {
 };
 
 const loadSummarySuccess = (state, summary) => {
-  state.data.summary = summary
-    .map(res => res.prefs)
-    .reduce(
-      (acc, cur) => {
-        acc[0] += cur[0];
-        acc[1] += cur[1];
-        acc[2] += cur[2];
-        acc[3] += cur[3];
-        acc[4] += cur[4];
-        acc[5] += cur[5];
-        acc[6] += cur[6];
-        return acc;
-      },
-      [0, 0, 0, 0, 0, 0, 0]
-    )
-    .map(sum => (sum > 0 ? Math.floor((sum / summary.length) * 100) : 0));
+  state.data.summary = summary.map(res => res.prefs).reduce(
+    (acc, cur) => {
+      acc[0] += cur[0];
+      acc[1] += cur[1];
+      acc[2] += cur[2];
+      acc[3] += cur[3];
+      acc[4] += cur[4];
+      acc[5] += cur[5];
+      acc[6] += cur[6];
+      return acc;
+    },
+    [0, 0, 0, 0, 0, 0, 0]
+  );
 };
 
 const loadUsersFailure = (state, error) => {

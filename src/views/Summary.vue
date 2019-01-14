@@ -15,25 +15,25 @@
 
       <div class="panel-body">
 
-        <SummaryTile title="Maandag" :subtitle="mondayDate" :percent="getSummary[0]"/>
+        <SummaryTile title="Maandag" :subtitle="mondayDate" :amountOfVotes="getSummary[0]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Dinsdag" :subtitle="tuesdayDate" :percent="getSummary[1]"/>
+        <SummaryTile title="Dinsdag" :subtitle="tuesdayDate" :amountOfVotes="getSummary[1]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Woensdag" :subtitle="wednesdayDate" :percent="getSummary[2]"/>
+        <SummaryTile title="Woensdag" :subtitle="wednesdayDate" :amountOfVotes="getSummary[2]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Donderdag" :subtitle="thursdayDate" :percent="getSummary[3]"/>
+        <SummaryTile title="Donderdag" :subtitle="thursdayDate" :amountOfVotes="getSummary[3]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Vrijdag" :subtitle="fridayDate" :percent="getSummary[4]"/>
+        <SummaryTile title="Vrijdag" :subtitle="fridayDate" :amountOfVotes="getSummary[4]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zaterdag" :subtitle="saturdayDate" :percent="getSummary[5]"/>
+        <SummaryTile title="Zaterdag" :subtitle="saturdayDate" :amountOfVotes="getSummary[5]"/>
         <div class="divider"></div>
 
-        <SummaryTile title="Zondag" :subtitle="sundayDate" :percent="getSummary[6]"/>
+        <SummaryTile title="Zondag" :subtitle="sundayDate" :amountOfVotes="getSummary[6]"/>
         <div class="divider"></div>
 
       </div>
